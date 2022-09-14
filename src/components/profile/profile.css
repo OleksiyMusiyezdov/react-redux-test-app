@@ -1,0 +1,18 @@
+.container {
+  margin: 25px 50px 75px 100px;
+}
+
+.image {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.block {
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: medium;
+  font-weight: 500;
+  margin-bottom: 10px;
+}

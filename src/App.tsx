@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
+import Feed from "./components/feed/feed.component";
+import SignIn from "./components/login/sign-in.component";
+import Profile from "./components/profile/profile";
+import { isAuthSelector } from "./redux/selectors";
+
+const theme = createTheme();
 
 function App() {
+  const isAuth = useSelector(isAuthSelector);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          {isAuth ? (
+            <>
+              <Route path="/" element={<Profile />} />
+              <Route path="profile" element={<Profile />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<SignIn />} />
+            </>
+          )}
+          <Route path="feed" element={<Feed />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </ThemeProvider>
     </div>
   );
 }
